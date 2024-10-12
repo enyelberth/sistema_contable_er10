@@ -24,7 +24,7 @@
 
 ## Description
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Esta API_REST se realiza con motivo de llevar un control de los ingresos y egresos de dinero [Nest](https://github.com/nestjs/nest).
 
 ## Project setup
 
@@ -76,9 +76,9 @@ Nest is an MIT-licensed open source project. It can grow thanks to the sponsors 
 
 ## Stay in touch
 
-- Author - [Kamil Myśliwiec](https://twitter.com/kammysliwiec)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Author - [Enyelberth Rodriguez](https://github.com/enyelberth)
+<!-- - Website - [https://nestjs.com](https://nestjs.com/) -->
+<!-- - Twitter - [@nestframework](https://twitter.com/nestframework) -->
 
 ## License
 
