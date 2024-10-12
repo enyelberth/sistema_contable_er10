@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  # nestjs:
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   container_name: nestjs
+  #   environment:
+  #     - DB_HOST=postgres
+  #     - DB_USERNAME=sgbidev
+  #     - DB_PASSWORD=sgbidev2023*
+  #     - DB_DATABASE=SGBI
+  #   ports:
+  #     - 3000:3000
+  #   depends_on:
+  #     - postgres
+  #     - redis
+  postgres:
+    image: postgres
+    container_name: sdgc-postgres
+    environment:
+      - POSTGRES_USER=enyelberth
+      - POSTGRES_PASSWORD=30204334
+      - POSTGRES_DB=sdgc
+      - TZ=America/Caracas
+    ports:
+      - 5432:5432
