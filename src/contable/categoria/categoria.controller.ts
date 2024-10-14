@@ -17,7 +17,6 @@ export class CategoriaController {
   constructor(private readonly categoriaService: CategoriaService) {}
 
   @Post()
-  
   create(@Body() createCategoriaDto: CreateCategoriaDto) {
     return this.categoriaService.create(createCategoriaDto);
   }
@@ -29,7 +28,7 @@ export class CategoriaController {
 
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.categoriaService.findOne(+id);
+    return this.categoriaService.findOne(1);
   }
 
   @Patch(':id')
