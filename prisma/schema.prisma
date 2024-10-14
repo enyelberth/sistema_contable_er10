@@ -15,47 +15,51 @@ datasource db {
 
 model Ingresos {
   id          Int        @id @default(autoincrement())
-  fecha       DateTime
+  fecha       DateTime   @default(now())
   description String
   monto       Float
   categoria   Categorias @relation(fields: [categoriaId], references: [id])
-  categoriaId Int        @unique
+  categoriaId Int
 }
 
 model IngresoFijos {
   id          Int        @id @default(autoincrement())
-  fecha       DateTime
+  fecha       DateTime   @default(now())
   description String
   monto       Float
   categoria   Categorias @relation(fields: [categoriaId], references: [id])
-  categoriaId Int        @unique
+  categoriaId Int
 }
 
 model Gasto {
   id          Int        @id @default(autoincrement())
-  fecha       DateTime
+  fecha       DateTime   @default(now())
   description String
   monto       Float
   categoria   Categorias @relation(fields: [categoriaId], references: [id])
-  categoriaId Int        @unique
+  categoriaId Int
 }
 
 model GastoFijo {
   id          Int        @id @default(autoincrement())
-  fecha       DateTime
+  fecha       DateTime   @default(now())
   description String
   monto       Float
   categoria   Categorias @relation(fields: [categoriaId], references: [id])
-  categoriaId Int        @unique
+  categoriaId Int
 }
 
 model Categorias {
-  id           Int           @id @default(autoincrement())
-  name         String
-  Ingresos     Ingresos?
-  IngresoFijos IngresoFijos?
-  Gasto        Gasto?
-  GastoFijo    GastoFijo?
+  id    Int      @id @default(autoincrement())
+  name  String
+  type  Type     @default(Ganancias)
+  fecha DateTime @default(now())
+
+  // Relaciones
+  ingresos     Ingresos[] // Relación uno a muchos
+  ingresoFijos IngresoFijos[] // Relación uno a muchos
+  gastos       Gasto[] // Relación uno a muchos
+  gastosFijos  GastoFijo[] // Relación uno a muchos
 }
 
 model Usuarios {
@@ -63,4 +67,9 @@ model Usuarios {
   fecha       DateTime
   description String
   monto       Float
+}
+
+enum Type {
+  Gasto
+  Ganancias
 }

@@ -9,7 +9,6 @@ import {
 } from '@nestjs/common';
 import { IngresosService } from './ingresos.service';
 import { CreateIngresoDto } from './dto/create-ingreso.dto';
-import { UpdateIngresoDto } from './dto/update-ingreso.dto';
 import { ApiTags } from '@nestjs/swagger';
 
 @ApiTags('Ingresos')
@@ -18,8 +17,8 @@ export class IngresosController {
   constructor(private readonly ingresosService: IngresosService) {}
 
   @Post()
-  create(@Body() createIngresoDto: CreateIngresoDto) {
-    return this.ingresosService.create(createIngresoDto);
+  create(@Body() ingreso: CreateIngresoDto) {
+    return this.ingresosService.create(ingreso);
   }
 
   @Get()
@@ -33,8 +32,8 @@ export class IngresosController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateIngresoDto: UpdateIngresoDto) {
-    return this.ingresosService.update(+id, updateIngresoDto);
+  update(@Param('id') id: string, @Body() ingreso: CreateIngresoDto) {
+    return this.ingresosService.update(+id, ingreso);
   }
 
   @Delete(':id')

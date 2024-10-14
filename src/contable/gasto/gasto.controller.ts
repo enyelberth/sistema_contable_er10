@@ -33,7 +33,7 @@ export class GastoController {
   }
 
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateGastoDto: UpdateGastoDto) {
+  update(@Param('id') id: string, @Body() updateGastoDto: CreateGastoDto) {
     return this.gastoService.update(+id, updateGastoDto);
   }
 
