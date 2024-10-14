@@ -2,8 +2,8 @@ import { Injectable } from '@nestjs/common';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
 
-import { Prisma, PrismaClient } from '@prisma/client';
-import { async } from 'rxjs';
+import { PrismaClient } from '@prisma/client';
+
 @Injectable()
 export class CategoriaService {
   prisma: any;
@@ -11,9 +11,11 @@ export class CategoriaService {
     this.prisma = new PrismaClient();
   }
   async create(createCategoriaDto: CreateCategoriaDto) {
+    console.log(createCategoriaDto.name);
+
     const createCa = await this.prisma.categorias.create({
       data: {
-        name: 'hola',
+        name: createCategoriaDto.name,
       },
     });
     console.log(createCa);

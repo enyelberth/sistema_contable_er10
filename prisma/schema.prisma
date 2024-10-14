@@ -42,7 +42,7 @@ model Gasto {
 
 model GastoFijo {
   id          Int        @id @default(autoincrement())
-  fecha       DatTime
+  fecha       DateTime
   description String
   monto       Float
   categoria   Categorias @relation(fields: [categoriaId], references: [id])
