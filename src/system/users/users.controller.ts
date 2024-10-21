@@ -18,7 +18,10 @@ export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
   @Post()
-  @ApiResponse({ status: 200, description: 'Se han obtenido los usuarios exitosamente',})
+  @ApiResponse({
+    status: 200,
+    description: 'Se han obtenido los usuarios exitosamente',
+  })
   // @ApiOperation({ summary: 'Crea un nuevo usuario' })
   create(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
@@ -26,7 +29,7 @@ export class UsersController {
 
   @Get()
   findAll() {
-    return this.usersService.findAll();
+    // return this.usersService.findAll();
   }
 
   @Get(':id')
