@@ -9,9 +9,10 @@ import { IngresosFijosModule } from './contable/ingresos-fijos/ingresos-fijos.mo
 import { GastoFijosModule } from './contable/gasto-fijos/gasto-fijos.module';
 import { GastoModule } from './contable/gasto/gasto.module';
 import { CategoriaModule } from './contable/categoria/categoria.module';
+import { CurrencyModule } from './account/currency/currency.module';
 
 @Module({
-  imports: [UsersModule,  IngresosModule, IngresosFijosModule, GastoFijosModule, GastoModule, CategoriaModule],
+  imports: [UsersModule,  IngresosModule, IngresosFijosModule, GastoFijosModule, GastoModule, CategoriaModule,CurrencyModule],
   controllers: [AppController],
   providers: [AppService],
 })

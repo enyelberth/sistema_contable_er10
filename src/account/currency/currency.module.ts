@@ -1,16 +1,9 @@
-
-
-
-
-export class CurrencyController {
-  @Post()
-  create() {
-    return "gholas";
-  }
-  @Get()
-  findAll() {}
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return ""+id
-  }
-}
+import { Module } from '@nestjs/common';
+import { CurrencyController } from './currency.controller';
+import { CurrencyService } from './currency.service';
+@Module({
+  // imports:[],
+  controllers: [CurrencyController],
+  providers: [CurrencyService],
+})
+export class CurrencyModule {}
