@@ -20,8 +20,8 @@ import { CreateaccountTypeDto } from './dto/create-accountType.dto';
       status: 200,
       description: 'Se han obtenido los usuarios exitosamente',
     })
-    create(@Body() createUserDto: CreateaccountTypeDto) {
-      return this.accountTypeService.create(createUserDto);
+    create(@Body() createAccountTypeDto: CreateaccountTypeDto) {
+      return this.accountTypeService.create(createAccountTypeDto);
     }
   
     @Get()
@@ -35,8 +35,8 @@ import { CreateaccountTypeDto } from './dto/create-accountType.dto';
     }
   
     @Patch(':id')
-    update(@Param('id') id: string, @Body() updateUserDto: CreateaccountTypeDto) {
-      return this.accountTypeService.update(+id, updateUserDto);
+    update(@Param('id') id: string, @Body() updateAccountTypeDto: CreateaccountTypeDto) {
+      return this.accountTypeService.update(+id, updateAccountTypeDto);
     }
   
     @Delete(':id')
