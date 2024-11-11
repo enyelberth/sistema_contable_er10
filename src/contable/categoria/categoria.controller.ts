@@ -10,7 +10,7 @@ import {
 import { CategoriaService } from './categoria.service';
 import { CreateCategoriaDto } from './dto/create-categoria.dto';
 import { UpdateCategoriaDto } from './dto/update-categoria.dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 @Controller('categoria')
 @ApiTags('Categoria')
 export class CategoriaController {
@@ -21,8 +21,11 @@ export class CategoriaController {
     console.log(categoria);
     return this.categoriaService.create(categoria);
   }
-
   @Get()
+  @ApiResponse({
+    status: 200,
+    description: 'Se han obtenido todos los tipos de cuenta exitosamente.',
+  })
   findAll() {
     return this.categoriaService.findAll();
   }
