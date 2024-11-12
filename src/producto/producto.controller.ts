@@ -7,18 +7,19 @@ import {
   Param,
   Delete,
 } from '@nestjs/common';
-import { CategoriaService } from './categoria.service';
-import { CreateCategoriaDto } from './dto/create-categoria.dto';
-import { UpdateCategoriaDto } from './dto/update-categoria.dto';
+
+import { CreateCategoriaDto } from 'src/contable/categoria/dto/create-categoria.dto';
 import { ApiResponse, ApiTags } from '@nestjs/swagger';
+import { ProductoService } from './producto.service';
+import { UpdateProductoDto } from './dto/update-producto.dto';
 @Controller('categoria')
 @ApiTags('Categoria')
-export class CategoriaController {
-  constructor(private readonly categoriaService: CategoriaService) {}
+export class ProductoController {
+  constructor(private readonly ProductoService: ProductoService) {}
   @Post()
   create(@Body() categoria: CreateCategoriaDto) {
     console.log(categoria);
-    return this.categoriaService.create(categoria);
+    return this.ProductoService.create(categoria);
   }
   @Get()
   @ApiResponse({
@@ -26,21 +27,22 @@ export class CategoriaController {
     description: 'Se han obtenido todos los tipos de cuenta exitosamente.',
   })
   findAll() {
-    return this.categoriaService.findAll();
+    return this.ProductoService.findAll();
   }
   @Get(':id')
   findOne(@Param('id') id: string) {
-    return this.categoriaService.findOne(1);
+    return this.ProductoService.findOne(1);
   }
   @Patch(':id')
   update(
     @Param('id') id: string,
-    @Body() updateCategoriaDto: UpdateCategoriaDto,
+    @Body() UpdateProductoDto: UpdateProductoDto,
   ) {
-    return this.categoriaService.update(+id, updateCategoriaDto);
+    return this.ProductoService.update(+id, UpdateProductoDto);
   }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
-    return this.categoriaService.remove(+id);
+    return this.ProductoService.remove(+id);
   }
 }
