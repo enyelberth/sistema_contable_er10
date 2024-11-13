@@ -1,0 +1,5 @@
+services:
+  web:
+    image: ${sgbiv2-nestjs}
+    ports:
+      - 3000:3000

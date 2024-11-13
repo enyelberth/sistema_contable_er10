@@ -17,11 +17,23 @@ services:
   #     - redis
   postgres:
     image: postgres
-    container_name: sdgc-postgres
+    container_name: sgbi-postgres
     environment:
-      - POSTGRES_USER=enyelberth
-      - POSTGRES_PASSWORD=30204334
-      - POSTGRES_DB=sdgc
+      - POSTGRES_USER=sgbidev
+      - POSTGRES_PASSWORD=sgbidev2023*
+      - POSTGRES_DB=SGBI
       - TZ=America/Caracas
     ports:
       - 5432:5432
+    volumes:
+      - /etc/localtime:/etc/localtime:ro
+      - /etc/timezone:/etc/timezone:ro
+      - pgdata:/var/lib/postgresql/data
+  redis:
+    image: redis
+    container_name: sgbi-redis
+    ports:
+      - 6379:6379
+
+volumes:
+  pgdata:
