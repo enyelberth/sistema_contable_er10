@@ -6,14 +6,12 @@ import {
 } from "@nestjs/common";
 import { AuthJwtService } from "../jwt/jwt.service";
 import { TokenBlacklistService } from "../jwt/blacklist/token.blacklist.service";
-import { RedisService } from "src/redis/redis.service";
 
 @Injectable()
 export class JwtAuthGuard implements CanActivate {
   constructor(
     private authJwtService: AuthJwtService,
     private tokenBlacklistService: TokenBlacklistService,
-    private cacheService: RedisService,
   ) {}
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
@@ -54,7 +52,6 @@ export class JwtAuthGuard implements CanActivate {
         return true;
       } else {
         const userData = await this.authJwtService.decoder(token);
-        await this.cacheService.delete(userData.userData.code);
       }
       //return user ? true : false;
     }

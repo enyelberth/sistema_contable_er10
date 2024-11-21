@@ -5,14 +5,12 @@ import { Repository } from "typeorm";
 import { CreateModuleDto, UpdateModuleDto } from "./dto/module.dto";
 import { ExceptionsMessages } from "src/exceptions/messages/exceptions.messages";
 import { AccessLevelService } from "../access-level/access-level.service";
-import { RedisService } from "src/redis/redis.service";
 @Injectable()
 export class ModulesService {
   constructor(
     @InjectRepository(Modules)
     private moduleRepository: Repository<Modules>,
     private accessLevel: AccessLevelService,
-    private cacheService: RedisService,
   ) {}
 
   exception = ExceptionsMessages;
@@ -67,7 +65,6 @@ export class ModulesService {
         this.exception.errorProcess();
       }
       const menu = await this.accessLevel.findAccessLevelByUser(role_code);
-      await this.cacheService.update(role_code, menu);
       this.exception.create(module.name_module, newModule[0]._code);
     } catch (error) {
       this.exception.createErrorSignature(error);
@@ -146,7 +143,6 @@ export class ModulesService {
         ],
       );
       const menu = await this.accessLevel.findAccessLevelByUser(role_code);
-      await this.cacheService.update(role_code, menu);
       this.exception.update(updateModuleDto.name_module);
     } catch (error) {
       this.exception.createErrorSignature(error);

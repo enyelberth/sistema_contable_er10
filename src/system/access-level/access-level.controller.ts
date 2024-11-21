@@ -10,16 +10,13 @@ import {
   ApiQuery,
 } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/auth/guards/jwt.guard";
-import { RedisService } from "src/redis/redis.service";
 import { AuthJwtService } from "src/auth/jwt/jwt.service";
 
 @ApiTags("AccessLevel")
 @Controller("access-level")
 export class AccessLevelController {
   constructor(
-    private readonly accessLevelService: AccessLevelService,
-    private readonly cacheService: RedisService,
-    private readonly authJwtService: AuthJwtService,
+    private readonly accessLevelService: AccessLevelService,    private readonly authJwtService: AuthJwtService,
   ) {}
 
   @ApiProperty()
@@ -126,15 +123,7 @@ export class AccessLevelController {
     const decodedToken = this.authJwtService.decoder(token);
     const role_code = decodedToken.userData.role_code;
 
-    const cachedData = await this.cacheService.get(role_code);
 
-    if (!cachedData) {
-      const menu =
-        await this.accessLevelService.findAccessLevelByUser(role_code);
-      await this.cacheService.set(role_code, menu);
-      return { menu };
-    }
 
-    return cachedData;
   }
 }

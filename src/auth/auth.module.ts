@@ -11,7 +11,6 @@ import { TokenBlacklistService } from "./jwt/blacklist/token.blacklist.service";
 import { AuthJwtService } from "./jwt/jwt.service";
 import { BlacklistCleanupService } from "./jwt/blacklist/cleanup.blacklist.service";
 import { ScheduleTaskService } from "./task/schedule.task.service";
-import { RedisService } from "src/redis/redis.service";
 
 @Module({
   imports: [
@@ -30,7 +29,7 @@ import { RedisService } from "src/redis/redis.service";
     AuthJwtService,
     BlacklistCleanupService,
     ScheduleTaskService,
-    RedisService,
+    
   ],
   exports: [
     AuthService,

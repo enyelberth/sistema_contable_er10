@@ -25,15 +25,8 @@ services:
       - TZ=America/Caracas
     ports:
       - 5432:5432
-    volumes:
-      - /etc/localtime:/etc/localtime:ro
-      - /etc/timezone:/etc/timezone:ro
-      - pgdata:/var/lib/postgresql/data
-  redis:
-    image: redis
-    container_name: sgbi-redis
-    ports:
-      - 6379:6379
+ 
+
 
 volumes:
   pgdata:

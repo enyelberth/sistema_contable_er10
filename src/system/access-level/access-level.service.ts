@@ -3,13 +3,11 @@ import { InjectRepository } from "@nestjs/typeorm";
 import { AccessLevel } from "./entities/access-level.entity";
 import { Repository } from "typeorm";
 import { ExceptionsMessages } from "src/exceptions/messages/exceptions.messages";
-import { RedisService } from "src/redis/redis.service";
 @Injectable()
 export class AccessLevelService {
   constructor(
     @InjectRepository(AccessLevel)
     private readonly accessLevelRepository: Repository<AccessLevel>,
-    private readonly cacheService: RedisService
   ) {}
 
   async findAccessLevelByUser(role_code: string) {
@@ -149,7 +147,6 @@ export class AccessLevelService {
         ExceptionsMessages.errorProcess();
       } else {
         const menu = await this.findAccessLevelByUser(role_code);
-        await this.cacheService.update(role_code, menu);
         ExceptionsMessages.update(
           `LOS PERMISOS`,
           "SE HAN ACTUALIZADO CON EXITO"

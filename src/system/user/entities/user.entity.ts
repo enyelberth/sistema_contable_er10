@@ -4,7 +4,6 @@ import {
   MaxLength,
   MinLength,
 } from "@nestjs/class-validator";
-import { Employeed } from "../../../rrhh/employeed/entities/employeed.entity";
 import { Role } from "../../roles/entities/role.entity";
 import { Status } from "../../status/entities/status.entity";
 import {
@@ -33,9 +32,6 @@ export class User {
   @JoinColumn([{ name: "role_code", referencedColumnName: "code" }])
   role_code: Role;
 
-  @ManyToOne((type) => Employeed)
-  @JoinColumn([{ name: "employee_code", referencedColumnName: "code" }])
-  employee_code: Employeed;
 
   @ManyToOne((type) => Status)
   @JoinColumn([{ name: "status_code", referencedColumnName: "code" }])

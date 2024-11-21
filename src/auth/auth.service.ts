@@ -6,7 +6,6 @@ import { LoginUserDto, logoutDto } from "./dto/login.dto";
 import { HashService } from "../hash/hash.service";
 import { AuthJwtService } from "./jwt/jwt.service";
 import { ExceptionsMessages } from "src/exceptions/messages/exceptions.messages";
-import { RedisService } from "src/redis/redis.service";
 import { TokenBlacklistService } from "./jwt/blacklist/token.blacklist.service";
 @Injectable()
 export class AuthService {
@@ -14,7 +13,6 @@ export class AuthService {
     @InjectRepository(User) private readonly userRepository: Repository<User>,
     private hashService: HashService,
     private authJwtService: AuthJwtService,
-    private readonly cacheService: RedisService,
     private readonly tokenBlacklistService: TokenBlacklistService
   ) {}
 
@@ -33,9 +31,7 @@ export class AuthService {
       user = user[0];
       if (!user) ExceptionsMessages.invalidCredentials();
 
-      const validateSession = await this.cacheService.get(user.code);
 
-      if (validateSession) ExceptionsMessages.sessionExists();
 
       if (user.status_code != "STS-00000") {
         ExceptionsMessages.userStatusIssue();
@@ -82,7 +78,6 @@ export class AuthService {
         `USUARIO ${userCode} HA INICIADO SESION EXITOSAMENTE DESDE ${clientIp}, ${os}, ${browser}`
       );
 
-      await this.cacheService.set(payload.userData.code, payload.userData.code);
 
       return { accessToken: accessToken };
     } catch (error) {
@@ -102,7 +97,6 @@ export class AuthService {
       ExceptionsMessages.errorProcess();
     }
     this.tokenBlacklistService.addToBlacklist(token);
-    await this.cacheService.delete(userCode);
     console.log(
       `USUARIO ${userCode} HA FINALIZADO LA SESION DESDE ${clientIp}, ${os}, ${browser}`
     );
@@ -118,10 +112,7 @@ export class AuthService {
       throw new UnauthorizedException("Token invalido o Expirado");
     }
     const newToken = this.authJwtService.generateToken(payload);
-    await this.cacheService.update(
-      payload.userData.code,
-      payload.userData.code
-    );
+
     this.tokenBlacklistService.addToBlacklist(oldToken);
     return { accessToken: newToken };
   }

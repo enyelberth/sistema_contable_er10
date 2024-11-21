@@ -6,7 +6,6 @@ import { Role } from "./entities/role.entity";
 import { AccessLevel } from "../access-level/entities/access-level.entity";
 import { AuthModule } from "../../auth/auth.module";
 import { AccessLevelModule } from "../access-level/access-level.module";
-import { RedisService } from "src/redis/redis.service";
 
 @Module({
   imports: [
@@ -15,7 +14,7 @@ import { RedisService } from "src/redis/redis.service";
     AccessLevelModule,
   ],
   controllers: [RolesController],
-  providers: [RolesService, RedisService],
+  providers: [RolesService],
   exports: [RolesService],
 })
 export class RolesModule {}
